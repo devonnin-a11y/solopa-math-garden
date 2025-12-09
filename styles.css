@@ -1,0 +1,403 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #3d3455 0%, #1e1828 55%, #120f1c 100%);
+  color: #f7f2ff;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+#app {
+  width: 100%;
+  max-width: 900px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, #272035, #3f3558);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sprite-face {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #ffe9a8, #f1b5ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.28);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.brand-sub {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.icon-button {
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.4rem 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Tabs */
+
+.world-tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem 0.3rem;
+  background: rgba(15, 10, 27, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.world-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.world-tab {
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fdf7ff;
+  cursor: pointer;
+}
+
+.world-tab.active {
+  background: linear-gradient(90deg, #ffb347, #ff6fd8);
+  color: #24182f;
+  font-weight: 600;
+}
+
+/* Worlds scroller */
+
+.worlds {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.worlds::-webkit-scrollbar {
+  height: 6px;
+}
+
+.worlds::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+.world {
+  scroll-snap-align: start;
+  min-width: 100%;
+  padding: 1rem 1rem 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.world-inner {
+  border-radius: 20px;
+  padding: 1rem;
+  width: 100%;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.06), rgba(12, 7, 22, 0.9));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.world-inner::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255, 221, 150, 0.18), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(160, 236, 255, 0.16), transparent 55%),
+    radial-gradient(circle at 30% 100%, rgba(167, 255, 207, 0.14), transparent 50%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.world-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.world-intro {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.world-header-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+/* Sprite bubble */
+
+.sprite-bubble {
+  background: rgba(20, 10, 37, 0.85);
+  border-radius: 16px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 0.75rem;
+}
+
+.sprite-emoji {
+  font-size: 1.2rem;
+}
+
+.sprite-text {
+  max-width: 130px;
+}
+
+/* Home world cards */
+
+.world-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.world-card {
+  border: none;
+  border-radius: 18px;
+  padding: 0.7rem;
+  background: rgba(33, 22, 54, 0.96);
+  color: #fdf7ff;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+
+.world-card-icon {
+  font-size: 1.3rem;
+}
+
+.world-card-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.world-card-text {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.world-tip {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+/* Numbers world */
+
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.num-button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: radial-gradient(circle at 30% 0, #ffe6c3, #ff8adc);
+  color: #3a2330;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.num-button:active {
+  transform: translateY(2px) scale(0.97);
+}
+
+.numbers-display {
+  margin-top: 0.5rem;
+  background: rgba(14, 7, 30, 0.9);
+  border-radius: 16px;
+  padding: 0.6rem;
+}
+
+.numbers-display-label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.3rem;
+}
+
+.stars-row {
+  min-height: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  font-size: 1.2rem;
+}
+
+/* Counting world */
+
+.counting-panel {
+  margin-top: 0.6rem;
+  background: rgba(18, 13, 36, 0.95);
+  border-radius: 20px;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.counting-visual {
+  min-height: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  font-size: 1.6rem;
+}
+
+.counting-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.pill-button {
+  border-radius: 999px;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  background: radial-gradient(circle at 30% 0, #d4ffd0, #6ef0ff);
+  color: #17323a;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.count-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.primary-button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ffb347, #ff6fd8);
+  color: #251323;
+  align-self: center;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.6);
+}
+
+.primary-button:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+/* Read & Count */
+
+.read-card {
+  margin-top: 0.7rem;
+  background: rgba(16, 12, 32, 0.95);
+  border-radius: 20px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.read-sentence {
+  font-size: 1.1rem;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.read-sentence span {
+  padding: 0.15rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.read-sentence span.highlighted {
+  background: linear-gradient(90deg, #ffb347, #ff6fd8);
+  color: #251323;
+}
+
+.read-visual {
+  display: flex;
+  gap: 0.2rem;
+  font-size: 1.6rem;
+}
+
+.apple-emoji {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+}
+
+/* Generic media query */
+
+@media (min-width: 720px) {
+  .world-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
