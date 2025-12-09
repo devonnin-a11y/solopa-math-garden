@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solōpa Math Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2b2738" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="brand">
+        <div class="sprite-face" aria-hidden="true">✨</div>
+        <div class="brand-text">
+          <div class="brand-title">Solōpa Math Garden</div>
+          <div class="brand-sub">Scroll to explore worlds 🌈</div>
+        </div>
+      </div>
+      <button class="icon-button" id="soundToggle" aria-pressed="true">
+        🔊
+      </button>
+    </header>
+
+    <!-- World Tabs (quick jump) -->
+    <nav class="world-tabs" aria-label="World navigation">
+      <button data-world-target="home" class="world-tab active">Home</button>
+      <button data-world-target="numbers" class="world-tab">Numbers</button>
+      <button data-world-target="counting" class="world-tab">Counting</button>
+      <button data-world-target="shapes" class="world-tab">Shapes</button>
+      <button data-world-target="colors" class="world-tab">Colors</button>
+      <button data-world-target="babymath" class="world-tab">Baby Math</button>
+      <button data-world-target="readcount" class="world-tab">Read &amp; Count</button>
+    </nav>
+
+    <!-- Worlds Scroll Container -->
+    <main class="worlds" id="worlds">
+      <!-- HOME WORLD -->
+      <section class="world world-home" data-world="home" aria-label="Home world">
+        <div class="world-inner">
+          <div class="world-title">Welcome, Little Sprouts 🌱</div>
+          <p class="world-intro">
+            Swipe left or right to visit each Solōpa world.<br />
+            Tap a card to jump right in!
+          </p>
+
+          <div class="world-card-grid">
+            <button class="world-card" data-world-target="numbers">
+              <div class="world-card-icon">1️⃣</div>
+              <div class="world-card-title">Number World</div>
+              <div class="world-card-text">Tap numbers and hear them speak.</div>
+            </button>
+
+            <button class="world-card" data-world-target="counting">
+              <div class="world-card-icon">🍎</div>
+              <div class="world-card-title">Counting Garden</div>
+              <div class="world-card-text">Count apples, stars, and animals.</div>
+            </button>
+
+            <button class="world-card" data-world-target="shapes">
+              <div class="world-card-icon">🔷</div>
+              <div class="world-card-title">Shape Forest</div>
+              <div class="world-card-text">Find circles, squares &amp; stars.</div>
+            </button>
+
+            <button class="world-card" data-world-target="colors">
+              <div class="world-card-icon">🎨</div>
+              <div class="world-card-title">Color Clouds</div>
+              <div class="world-card-text">Paint creatures with cozy colors.</div>
+            </button>
+
+            <button class="world-card" data-world-target="babymath">
+              <div class="world-card-icon">⭐</div>
+              <div class="world-card-title">Baby Math</div>
+              <div class="world-card-text">
+                Tiny addition &amp; subtraction with pictures.
+              </div>
+            </button>
+
+            <button class="world-card" data-world-target="readcount">
+              <div class="world-card-icon">📖</div>
+              <div class="world-card-title">Read &amp; Count</div>
+              <div class="world-card-text">
+                Read simple number sentences together.
+              </div>
+            </button>
+          </div>
+
+          <p class="world-tip">
+            Tip for Mom: you can sit with them and read the prompts while the
+            app speaks aloud. Tap things to repeat.
+          </p>
+        </div>
+      </section>
+
+      <!-- NUMBERS WORLD -->
+      <section class="world world-numbers" data-world="numbers" aria-label="Numbers world">
+        <div class="world-inner">
+          <div class="world-header-row">
+            <div>
+              <div class="world-title">Number World 1–10</div>
+              <p class="world-intro">
+                Tap a number. The Solōpa Sprite says it out loud and shows stars.
+              </p>
+            </div>
+            <div class="sprite-bubble">
+              <span class="sprite-emoji">🧚‍♀️</span>
+              <span class="sprite-text" id="numbersSpriteText">Tap a number!</span>
+            </div>
+          </div>
+
+          <div class="numbers-grid">
+            <!-- 1 to 10 buttons -->
+            <!-- Each will be wired in JS -->
+            <button class="num-button" data-number="1">1</button>
+            <button class="num-button" data-number="2">2</button>
+            <button class="num-button" data-number="3">3</button>
+            <button class="num-button" data-number="4">4</button>
+            <button class="num-button" data-number="5">5</button>
+            <button class="num-button" data-number="6">6</button>
+            <button class="num-button" data-number="7">7</button>
+            <button class="num-button" data-number="8">8</button>
+            <button class="num-button" data-number="9">9</button>
+            <button class="num-button" data-number="10">10</button>
+          </div>
+
+          <div class="numbers-display">
+            <div class="numbers-display-label">Magic Stars:</div>
+            <div class="stars-row" id="starsRow"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COUNTING WORLD -->
+      <section class="world world-counting" data-world="counting" aria-label="Counting garden">
+        <div class="world-inner">
+          <div class="world-header-row">
+            <div>
+              <div class="world-title">Counting Garden</div>
+              <p class="world-intro">
+                Count the apples together. Tap next to change the number.
+              </p>
+            </div>
+            <div class="sprite-bubble">
+              <span class="sprite-emoji">🍃</span>
+              <span class="sprite-text" id="countingSpriteText">How many apples?</span>
+            </div>
+          </div>
+
+          <div class="counting-panel">
+            <div class="counting-visual" id="appleArea">
+              <!-- Apples will be generated by JS -->
+            </div>
+            <div class="counting-controls">
+              <button id="countDown" class="pill-button">−</button>
+              <div class="count-value" id="countValue">3</div>
+              <button id="countUp" class="pill-button">＋</button>
+            </div>
+            <button id="countSpeak" class="primary-button">
+              🔊 Say it together
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHAPES WORLD (placeholder structure) -->
+      <section class="world world-shapes" data-world="shapes" aria-label="Shape forest">
+        <div class="world-inner">
+          <div class="world-title">Shape Forest (Coming Alive)</div>
+          <p class="world-intro">
+            Soon: tap glowing shapes in the forest and match them to their names.
+          </p>
+        </div>
+      </section>
+
+      <!-- COLORS WORLD (placeholder structure) -->
+      <section class="world world-colors" data-world="colors" aria-label="Color clouds">
+        <div class="world-inner">
+          <div class="world-title">Color Clouds (Coming Alive)</div>
+          <p class="world-intro">
+            Soon: paint magical creatures and hear the color names out loud.
+          </p>
+        </div>
+      </section>
+
+      <!-- BABY MATH (placeholder structure) -->
+      <section class="world world-babymath" data-world="babymath" aria-label="Baby math">
+        <div class="world-inner">
+          <div class="world-title">Baby Math (Coming Alive)</div>
+          <p class="world-intro">
+            Soon: tiny picture-based addition and subtraction with happy sparkles.
+          </p>
+        </div>
+      </section>
+
+      <!-- READ & COUNT WORLD -->
+      <section class="world world-readcount" data-world="readcount" aria-label="Read and count">
+        <div class="world-inner">
+          <div class="world-header-row">
+            <div>
+              <div class="world-title">Read &amp; Count</div>
+              <p class="world-intro">
+                Read the sentence together. The Solōpa Sprite will highlight words
+                and speak them.
+              </p>
+            </div>
+            <div class="sprite-bubble">
+              <span class="sprite-emoji">📚</span>
+              <span class="sprite-text" id="readSpriteText">Tap the leaf to read!</span>
+            </div>
+          </div>
+
+          <div class="read-card">
+            <div class="read-sentence" id="readSentence">
+              <span data-word="Two">Two</span>
+              <span data-word="red">red</span>
+              <span data-word="apples">apples</span>
+            </div>
+            <div class="read-visual">
+              <span class="apple-emoji">🍎</span>
+              <span class="apple-emoji">🍎</span>
+            </div>
+            <button id="readPlay" class="primary-button">
+              🍃 Read this sentence
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
